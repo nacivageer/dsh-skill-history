@@ -45,16 +45,12 @@ test('inflateFrames joins every concatenated frame', () => {
   assert.equal(consumed, buffer.length);
 });
 
-test('a partial trailing frame never fabricates output', () => {
+test('a frame cut mid-write is a live tail, not an unknown format', () => {
   const first = zstdCompressSync(Buffer.from('{"type":"a"}\n', 'utf8'));
   const second = zstdCompressSync(Buffer.from('{"type":"b"}\n', 'utf8'));
-  const { text, consumed, failed } = inflateFrames(Buffer.concat([first, second.subarray(0, second.length - 4)]));
-  // Node versions differ: one decodes frame by frame and keeps the prefix, the
-  // other fails the whole slice. Neither may invent text, and the next scan
-  // re-reads from `consumed` once the writer finishes the frame.
-  assert.ok(text === '' || text === '{"type":"a"}\n');
-  assert.ok(consumed <= first.length);
-  // A tail cut mid-frame is a live file being appended to, not a broken log.
+  const { failed } = inflateFrames(Buffer.concat([first, second.subarray(0, second.length - 4)]));
+  // Node 22 emits the bytes it could decode and calls the input consumed;
+  // Node 24+ throws and keeps the prefix. Neither is a foreign format.
   assert.equal(failed, false);
 });
 
@@ -239,6 +235,33 @@ test('an appended frame is picked up without a full re-read', async () => {
     assert.equal(result.files, 1);
     assert.equal(cache.get(file).state.calls.length, 2);
     assert.ok(cache.get(file).state.consumed > consumed);
+  } finally {
+    await rm(root, { recursive: true, force: true });
+  }
+});
+
+test('a frame cut mid-write is read once after the append completes it', async () => {
+  const root = await mkdtemp(join(tmpdir(), 'dsh-skill-history-'));
+  try {
+    const dir = join(root, 'ws', 'a');
+    await mkdir(dir, { recursive: true });
+    const file = join(dir, 'session.v4.jsonl.zstd');
+    const first = zstdCompressSync(Buffer.from(line(header) + line(call(1794000001000, 'memory'))));
+    const second = zstdCompressSync(Buffer.from(line(call(1794000002000, 'office'))));
+    const cut = second.subarray(0, second.length - 5);
+    await writeFile(file, Buffer.concat([first, cut]));
+
+    const cache = new Map();
+    await scanUsage(root, cache);
+    // Node 24+ refuses the whole slice when its last frame is incomplete, so
+    // the complete frame before it may not be parsed yet. Node 22 parses it.
+    assert.ok(callCount(cache) <= 1);
+
+    await appendFile(file, second.subarray(second.length - 5));
+    await scanUsage(root, cache);
+    // Exactly once, not zero (a decoder that swallowed the cut frame) and not
+    // twice (a re-read that forgot the partial tail).
+    assert.equal(callCount(cache), 2);
   } finally {
     await rm(root, { recursive: true, force: true });
   }

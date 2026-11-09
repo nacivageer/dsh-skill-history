@@ -495,6 +495,27 @@ async function writeGroups(file, groups, colors) {
 const yieldTurn = () => new Promise((resolve) => setImmediate(resolve));
 
 /**
+ * Node 22's zstd decoder accepts a truncated frame: it returns the bytes it
+ * could decode and reports the whole input as consumed. Resuming "from the
+ * last consumed byte" would then skip the missing tail of that frame forever.
+ * Node 24+ throws on the incomplete frame and stops before it. Probe once at
+ * load; where the decoder cannot be trusted to stop at a frame boundary,
+ * changed files are re-decoded from zero (still only when the file changes).
+ */
+const TRUSTS_FRAME_BOUNDARY = (() => {
+  if (typeof zlib.zstdCompressSync !== 'function' || typeof zlib.zstdDecompressSync !== 'function') {
+    return false;
+  }
+  try {
+    const frame = zlib.zstdCompressSync(Buffer.from('{"type":"probe"}\n'.repeat(4)));
+    zlib.zstdDecompressSync(frame.subarray(0, frame.length - 4));
+    return false;
+  } catch {
+    return true;
+  }
+})();
+
+/**
  * Walk `<DSH_HOME>/sessions/<workspace>/<session>/session.v4.jsonl.zstd` and
  * decode only the bytes each cached entry has not consumed yet.
  *
@@ -536,8 +557,10 @@ export async function scanUsage(root, cache = new Map()) {
       continue;
     }
     // Append-only logs: decode from the last consumed byte. A shorter file
-    // (rewritten or replaced) falls back to a full parse.
-    const resumable = cached !== undefined
+    // (rewritten or replaced) falls back to a full parse, and so does every
+    // file on a decoder that does not stop at a frame boundary.
+    const resumable = TRUSTS_FRAME_BOUNDARY
+      && cached !== undefined
       && cached.state.consumed > 0
       && cached.state.consumed <= buffer.length;
     const state = resumable ? cached.state : createSessionState();
