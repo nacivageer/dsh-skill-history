@@ -58,7 +58,7 @@ plugin_manager install_bundle  target=/absolute/path/to/dsh-skill-history
 ### 从 GitHub（仓库发布后）
 
 ```sh
-dsh plugin --profile <profile> add github:72NG/dsh-skill-history
+dsh plugin --profile <profile> add github:nacivageer/dsh-skill-history
 ```
 
 ### 桌面端
@@ -69,7 +69,7 @@ dsh plugin --profile <profile> add github:72NG/dsh-skill-history
 ### 更新 / 卸载
 
 ```sh
-dsh plugin --profile <profile> update github:72NG/dsh-skill-history
+dsh plugin --profile <profile> update github:nacivageer/dsh-skill-history
 dsh plugin --profile <profile> remove dsh-skill-history
 ```
 

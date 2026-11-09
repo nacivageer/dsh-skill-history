@@ -35,11 +35,11 @@
   "author": "72NG",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/72NG/dsh-skill-history.git"
+    "url": "git+https://github.com/nacivageer/dsh-skill-history.git"
   },
-  "homepage": "https://github.com/72NG/dsh-skill-history#readme",
+  "homepage": "https://github.com/nacivageer/dsh-skill-history#readme",
   "bugs": {
-    "url": "https://github.com/72NG/dsh-skill-history/issues"
+    "url": "https://github.com/nacivageer/dsh-skill-history/issues"
   },
   "engines": {
     "node": ">=22.19.0",

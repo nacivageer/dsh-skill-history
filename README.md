@@ -67,7 +67,7 @@ plugin_manager install_bundle  target=/absolute/path/to/dsh-skill-history
 ### From GitHub (after the repository is published)
 
 ```sh
-dsh plugin --profile <profile> add github:72NG/dsh-skill-history
+dsh plugin --profile <profile> add github:nacivageer/dsh-skill-history
 ```
 
 ### Desktop app
@@ -78,7 +78,7 @@ manager, then refresh the page once. The sidebar gets a bar-chart icon.
 ### Update / remove
 
 ```sh
-dsh plugin --profile <profile> update github:72NG/dsh-skill-history
+dsh plugin --profile <profile> update github:nacivageer/dsh-skill-history
 dsh plugin --profile <profile> remove dsh-skill-history
 ```
 
