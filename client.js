@@ -87,7 +87,7 @@ window.__ModuleLoader__.load({
         'subtitle': 'Calls of the skill tool, per day',
         'status.scanning': 'Scanning sessions…',
         'status.failed': 'Cannot reach the Host route',
-        'status.ok': '{calls} calls · {sessions} sessions',
+        'status.ok': '{calls} calls · {sessions} unique sessions',
         'status.updated': 'updated {time}',
         'status.badLines': '{n} unreadable lines skipped',
         'status.failedFiles': '{n} files could not be decoded',
@@ -163,7 +163,7 @@ window.__ModuleLoader__.load({
         'subtitle': '按天统计 skill 工具的调用',
         'status.scanning': '正在扫描会话……',
         'status.failed': '连不上 Host 路由',
-        'status.ok': '{calls} 次调用 · {sessions} 个会话',
+        'status.ok': '{calls} 次调用 · {sessions} 个独立会话',
         'status.updated': '{time} 更新',
         'status.badLines': '跳过 {n} 行坏行',
         'status.failedFiles': '{n} 个文件无法解压',
@@ -297,7 +297,7 @@ window.__ModuleLoader__.load({
 .dss__empty{padding:28px 0;color:var(--dsw-alias-label-secondary);font-size:13px}
 .dss__zero{margin-top:22px;padding-top:14px;border-top:1px solid var(--dsw-alias-border-l2)}
 .dss__zeroTitle{font-size:13px;font-weight:600;color:var(--dsw-alias-label-secondary);margin-bottom:4px}
-.dss__zeroList{font-size:14px;line-height:1.7;color:var(--dsw-alias-label-secondary);word-break:break-all}
+.dss__zeroList{font-size:14px;line-height:1.7;color:var(--dsw-alias-label-secondary);word-break:normal;overflow-wrap:anywhere}
 .dss__zeroNote{font-size:12px;color:var(--dsw-alias-label-secondary);opacity:.75;margin-top:6px}
 .dss__navBtn{font:inherit;font-size:14px;line-height:1;border:1px solid var(--dsw-alias-border-l2);background:transparent;color:var(--dsw-alias-label-secondary);border-radius:999px;padding:7px 12px;cursor:pointer;white-space:nowrap}
 .dss__navBtn:hover{color:var(--dsw-alias-label-primary);border-color:var(--dsw-alias-label-secondary);background:var(--dsw-alias-bg-layer-2)}
