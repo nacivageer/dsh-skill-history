@@ -32,6 +32,15 @@
     "statistics"
   ],
   "license": "MIT",
+  "author": "72NG",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/72NG/dsh-skill-history.git"
+  },
+  "homepage": "https://github.com/72NG/dsh-skill-history#readme",
+  "bugs": {
+    "url": "https://github.com/72NG/dsh-skill-history/issues"
+  },
   "engines": {
     "node": ">=22.19.0",
     "dsh": ">=0.2.2-rc.1"
