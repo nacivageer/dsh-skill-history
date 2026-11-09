@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Skill usage history",
+    "description": "Skill calls per day, rebuilt from your local session logs: drill into the sessions that used them, and group the skills you care about."
+  }
+}

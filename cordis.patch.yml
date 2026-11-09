@@ -1,0 +1,4 @@
+# dsh-skill-history: one Host route pair (data + groups) and one Client sidebar panel.
+- insert:
+    - id: dsh-skill-history
+      name: dsh-skill-history

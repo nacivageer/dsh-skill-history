@@ -1,0 +1,51 @@
+{
+  "name": "dsh-skill-history",
+  "version": "0.2.0",
+  "description": "Skill usage history for DeepSeek Harness — daily counts rebuilt from your own local session logs, drill-down to the sessions that used them, and groups to watch.",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./client": "./client.js",
+    "./locale/*.json": "./locale/*.json",
+    "./icon": "./icon.svg"
+  },
+  "files": [
+    "index.js",
+    "client.js",
+    "cordis.patch.yml",
+    "locale/*.json",
+    "icon.svg",
+    "README.md",
+    "README.zh.md",
+    "LICENSE",
+    "CHANGELOG.md",
+    "docs/*.png"
+  ],
+  "keywords": [
+    "deepseek",
+    "harness",
+    "dsh",
+    "dsh-plugin",
+    "skills",
+    "usage",
+    "statistics"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.19.0",
+    "dsh": ">=0.2.2-rc.1"
+  },
+  "scripts": {
+    "test": "node --test test/"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "platform": "web",
+      "immediately": true
+    }
+  }
+}

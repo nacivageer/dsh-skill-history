@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+  <defs>
+    <clipPath id="skill-history-tile">
+      <rect x="0" y="0" width="24" height="24" rx="7.4"/>
+    </clipPath>
+  </defs>
+  <g clip-path="url(#skill-history-tile)">
+    <rect x="0" y="0" width="24" height="24" fill="#4a4e57"/>
+    <g stroke="#ffffff" stroke-opacity="0.18" stroke-width="0.9">
+      <path d="M8 0V24M16 0V24M0 8H24M0 16H24"/>
+    </g>
+    <path d="M3.6 3.2V20.6H20.8" fill="none" stroke="#ffffff" stroke-opacity="0.42" stroke-width="1"/>
+    <g fill="#ffffff">
+      <rect x="5.2" y="13.6" width="3.5" height="7" rx="1.2"/>
+      <rect x="10.25" y="9.6" width="3.5" height="11" rx="1.2"/>
+      <rect x="15.3" y="5.4" width="3.5" height="15.2" rx="1.2"/>
+    </g>
+  </g>
+</svg>
