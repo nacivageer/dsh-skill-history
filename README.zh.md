@@ -41,9 +41,9 @@ DSH 显示**有哪些技能**，不显示**哪些真被用了**。一个装了�
 
 ## 安装
 
-需要 DSH `0.2.2-rc.1` 或更新版本。
+需要 DSH `0.2.2-rc.1` 或更新版本，以及 Node `>=22.19.0`（日志解压用 `zlib.zstdDecompressSync`，Node 太旧会显示错误条而不是统计数）。
 
-### 从本地目录（现在就能用）
+### 从本地目录
 
 ```sh
 dsh plugin --profile <profile> add link:/absolute/path/to/dsh-skill-history
@@ -55,7 +55,7 @@ dsh plugin --profile <profile> add link:/absolute/path/to/dsh-skill-history
 plugin_manager install_bundle  target=/absolute/path/to/dsh-skill-history
 ```
 
-### 从 GitHub（仓库发布后）
+### 从 GitHub
 
 ```sh
 dsh plugin --profile <profile> add github:nacivageer/dsh-skill-history
