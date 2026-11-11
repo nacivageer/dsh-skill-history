@@ -50,9 +50,11 @@ Two things are true by design:
 
 ## Install
 
-Requires DSH `0.2.2-rc.1` or newer.
+Requires DSH `0.2.2-rc.1` or newer, and Node `>=22.19.0` — the log decoder uses
+`zlib.zstdDecompressSync`, and an older Node shows an error banner instead of
+counts.
 
-### From a checkout (works today)
+### From a checkout
 
 ```sh
 dsh plugin --profile <profile> add link:/absolute/path/to/dsh-skill-history
@@ -64,7 +66,7 @@ No `dsh` CLI? Point the plugin manager at the folder instead:
 plugin_manager install_bundle  target=/absolute/path/to/dsh-skill-history
 ```
 
-### From GitHub (after the repository is published)
+### From GitHub
 
 ```sh
 dsh plugin --profile <profile> add github:nacivageer/dsh-skill-history
